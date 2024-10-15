@@ -1,5 +1,3 @@
-version: '3.8'  # Ou outra versão compatível que você esteja usando
-
 services:
   icecast:
     image: moul/icecast:latest
