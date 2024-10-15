@@ -1,5 +1,6 @@
 FROM moul/icecast
-ADD ./icecast.xml /etc/icecast2
+ADD ./icecast2/icecast.xml /etc/icecast2
+
 
 # Defina as variáveis de ambiente
 ENV ICECAST_SOURCE_PASSWORD=hackme \
