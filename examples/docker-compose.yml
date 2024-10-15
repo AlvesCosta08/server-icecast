@@ -1,17 +1,19 @@
 services:
   icecast:
-    image: moul/icecast:latest
+    image: meu_icecast # Nome da imagem que você criou com o Dockerfile
     volumes:
-      - logs:/var/log/icecast2
-      - /etc/localtime:/etc/localtime:ro 
+      - logs:/var/log/icecast2 # Volume para armazenar logs
+      - /etc/localtime:/etc/localtime:ro # Sincronizar o tempo do host
     environment:
-      ICECAST_SOURCE_PASSWORD: hackme
-      ICECAST_ADMIN_PASSWORD: hackme
-      ICECAST_PASSWORD: hackme
-      ICECAST_RELAY_PASSWORD: hackme
+      ICECAST_SOURCE_PASSWORD: hackme # Senha para fonte
+      ICECAST_ADMIN_PASSWORD: hackme  # Senha do administrador
+      ICECAST_PASSWORD: hackme         # Senha padrão
+      ICECAST_RELAY_PASSWORD: hackme   # Senha do relay
     ports:
-      - "8000:8000"
+      - "8000:8000" # Mapeia a porta 8000 do container para a porta 8000 do host
 
 volumes:
-  logs:
+  logs: # Define um volume para persistência de logs
+
+
 
