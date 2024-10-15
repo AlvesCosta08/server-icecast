@@ -1,0 +1,70 @@
+<icecast>
+
+    <!-- Limites -->
+    <limits>
+        <clients>1000</clients> <!-- Máximo de ouvintes simultâneos -->
+        <sources>42</sources> <!-- Máximo de fontes simultâneas -->
+        <threadpool>5</threadpool>
+        <queue-size>524288</queue-size>
+        <client-timeout>30</client-timeout>
+        <header-timeout>15</header-timeout>
+        <source-timeout>10</source-timeout>
+        <burst-on-connect>1</burst-on-connect> <!-- Permitir burst de dados ao conectar -->
+        <burst-size>65535</burst-size> <!-- Tamanho do burst de dados em bytes -->
+    </limits>
+
+    <!-- Autenticação -->
+    <authentication>
+        <source-password>hackme</source-password> <!-- Senha padrão de conexão da fonte para o SAM Broadcaster -->
+        <relay-password>hackme</relay-password>
+        <admin-user>admin</admin-user>
+        <admin-password>hackme</admin-password>
+    </authentication>
+
+    <!-- Configurações do diretório de fluxo -->
+    <directory>
+        <yp-url-timeout>15</yp-url-timeout>
+        <yp-url>http://dir.xiph.org/cgi-bin/yp-cgi</yp-url>
+    </directory>
+
+    <!-- Configurações do servidor -->
+    <hostname>localhost</hostname> <!-- Ou seu IP público, se você estiver transmitindo externamente -->
+
+    <!-- Configurações da porta TCP -->
+    <listen-socket>
+        <port>8000</port> <!-- Porta usada para receber conexões de ouvintes e fontes -->
+    </listen-socket>
+
+    <!-- Configurações específicas de montagem -->
+    <mount>
+        <mount-name>/stream</mount-name> <!-- Este é o ponto de montagem que o SAM Broadcaster irá usar -->
+        <username>source</username>
+        <password>hackme</password> <!-- Essa senha deve corresponder à configurada no SAM Broadcaster -->
+        <max-listeners>1000</max-listeners>
+        <burst-size>65536</burst-size>
+    </mount>
+
+    <!-- Configurações do caminho do arquivo -->
+    <paths>
+        <basedir>/usr/share/icecast2</basedir>
+        <logdir>/var/log/icecast2</logdir>
+        <webroot>/usr/share/icecast2/web</webroot>
+        <adminroot>/usr/share/icecast2/admin</adminroot>
+        <alias source="/" dest="/status.xsl"/>
+    </paths>
+
+    <!-- Configurações de Registro (Logging) -->
+    <logging>
+        <accesslog>access.log</accesslog>
+        <errorlog>error.log</errorlog>
+        <loglevel>3</loglevel>
+        <logsize>10000</logsize>
+    </logging>
+
+    <!-- Configurações de Segurança -->
+    <security>
+        <chroot>0</chroot>
+    </security>
+
+</icecast>
+
