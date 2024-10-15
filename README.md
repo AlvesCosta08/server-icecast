@@ -59,5 +59,4 @@ icecast:
 ## License
 
 [MIT](https://github.com/moul/docker-icecast/blob/master/LICENSE.md)
-# servidor-audio
-# server-icecast
+
