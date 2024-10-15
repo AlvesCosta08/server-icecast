@@ -1,23 +1,32 @@
+# Usar a imagem base do Debian
 FROM debian:stable-slim
 
+# Instalar dependências e Icecast
+RUN apt-get -qq -y update && \
+    apt-get -qq -y install icecast2 && \
+    apt-get -y autoclean && \
+    apt-get clean
 
-ENV DEBIAN_FRONTEND noninteractive
+# Criar o diretório e arquivo de configuração
+RUN mkdir -p /etc/icecast2 && \
+    touch /var/log/icecast2/access.log && \
+    touch /var/log/icecast2/error.log
 
-RUN apt-get -qq -y update; \
-  apt-get -qq -y full-upgrade; \ 
-  apt-get -qq -y install icecast2 python-setuptools sudo cron-apt; \
-  apt-get -y autoclean; \
-  apt-get clean; \
-  chown -R icecast2 /etc/icecast2; \
-  chmod 777 /var/log/icecast2/access.log; \
-  chmod 777 /var/log/icecast2/error.log ;\
-  sed -i 's/ -d//' /etc/cron-apt/action.d/3-download 
+# Defina as permissões adequadas para os arquivos de log
+RUN chmod 666 /var/log/icecast2/access.log && \
+    chmod 666 /var/log/icecast2/error.log
 
-CMD ["/start.sh"]
-EXPOSE 8000
-VOLUME ["/config", "/var/log/icecast2", "/etc/icecast2"]
+# Defina as variáveis de ambiente
+ENV ICECAST_SOURCE_PASSWORD=hackme \
+    ICECAST_ADMIN_PASSWORD=hackme \
+    ICECAST_PASSWORD=hackme \
+    ICECAST_RELAY_PASSWORD=hackme
 
-ADD ./start.sh /start.sh
-ADD ./etc /etc
+# Copiar o arquivo de configuração do Icecast
+COPY ./etc/icecast2/icecast.xml /etc/icecast2/icecast.xml
+
+# Comando para iniciar o Icecast
+CMD ["icecast", "-c", "/etc/icecast2/icecast.xml"]
+
 
 
