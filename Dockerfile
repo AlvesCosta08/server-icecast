@@ -11,7 +11,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Cria um usuário e grupo não root para executar o Icecast
-RUN useradd -m icecast && mkdir -p /var/log/icecast2 && chown -R icecast:icecast /var/log/icecast2 /etc/icecast2
+RUN groupadd -f icecast && useradd -m -g icecast icecast && \
+    mkdir -p /var/log/icecast2 && chown -R icecast:icecast /var/log/icecast2 /etc/icecast2
 
 # Expõe a porta padrão do Icecast
 EXPOSE 8000
@@ -21,6 +22,7 @@ USER icecast
 
 # Comando para iniciar o Icecast
 CMD ["icecast2", "-c", "/etc/icecast2/icecast.xml"]
+
 
 
 
