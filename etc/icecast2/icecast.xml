@@ -28,7 +28,7 @@
 
     <!-- Configurações do servidor -->
     <hostname>https://server-icecast.onrender.com</hostname> <!-- Substitua por seu domínio ou IP -->
-    <location>Brasil</location> <!-- Substitua pela sua localização -->
+    <location>Brasilia, Brasil</location> <!-- Substitua pela sua localização -->
     <admin>codigoquatro2022@gmail.com</admin> <!-- Substitua pelo seu e-mail de contato -->
 
     <!-- Configurações da porta TCP -->
