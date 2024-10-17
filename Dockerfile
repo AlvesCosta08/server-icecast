@@ -1,32 +1,27 @@
-# Usar a imagem base do Debian
-FROM debian:stable-slim
+# Use a imagem base do Icecast
+FROM ubuntu:latest
 
-# Instalar dependências e Icecast
-RUN apt-get -qq -y update && \
-    apt-get -qq -y install icecast2 && \
-    apt-get -y autoclean && \
+# Atualiza o sistema e instala o Icecast
+RUN apt-get update && \
+    apt-get install -y icecast2 && \
     apt-get clean
 
-# Criar o diretório e arquivo de configuração
-RUN mkdir -p /etc/icecast2 && \
-    touch /var/log/icecast2/access.log && \
-    touch /var/log/icecast2/error.log
+# Copia o arquivo de configuração personalizado (se houver) para o contêiner
+COPY icecast.xml /etc/icecast2/icecast.xml
 
-# Defina as permissões adequadas para os arquivos de log
-RUN chmod 666 /var/log/icecast2/access.log && \
-    chmod 666 /var/log/icecast2/error.log
+# Define variáveis de ambiente para senhas do Icecast
+ENV ICECAST_SOURCE_PASSWORD hackme
+ENV ICECAST_ADMIN_PASSWORD hackme
+ENV ICECAST_PASSWORD hackme
+ENV ICECAST_RELAY_PASSWORD hackme
 
-# Defina as variáveis de ambiente
-ENV ICECAST_SOURCE_PASSWORD=hackme \
-    ICECAST_ADMIN_PASSWORD=hackme \
-    ICECAST_PASSWORD=hackme \
-    ICECAST_RELAY_PASSWORD=hackme
-
-# Copiar o arquivo de configuração do Icecast
-COPY ./etc/icecast2/icecast.xml /etc/icecast2/icecast.xml
+# Expõe a porta padrão do Icecast
+EXPOSE 8000
 
 # Comando para iniciar o Icecast
-CMD ["icecast", "-c", "/etc/icecast2/icecast.xml"]
+CMD ["icecast2", "-c", "/etc/icecast2/icecast.xml"]
+
+
 
 
 
