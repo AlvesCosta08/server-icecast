@@ -1,23 +1,23 @@
 <icecast>
     <!-- Limites -->
     <limits>
-        <clients>1000</clients> <!-- Máximo de ouvintes simultâneos -->
-        <sources>42</sources> <!-- Máximo de fontes simultâneas -->
+        <clients>1000</clients>
+        <sources>42</sources>
         <threadpool>5</threadpool>
         <queue-size>524288</queue-size>
         <client-timeout>30</client-timeout>
         <header-timeout>15</header-timeout>
         <source-timeout>10</source-timeout>
-        <burst-on-connect>1</burst-on-connect> <!-- Permitir burst de dados ao conectar -->
-        <burst-size>65535</burst-size> <!-- Tamanho do burst de dados em bytes -->
+        <burst-on-connect>1</burst-on-connect>
+        <burst-size>65535</burst-size>
     </limits>
 
     <!-- Autenticação -->
     <authentication>
-        <source-password>hackme</source-password> <!-- Senha para as fontes -->
-        <relay-password>hackme</relay-password> <!-- Senha para os relays -->
+        <source-password>hackme</source-password>
+        <relay-password>hackme</relay-password>
         <admin-user>admin</admin-user>
-        <admin-password>hackme</admin-password> <!-- Senha do administrador -->
+        <admin-password>hackme</admin-password>
     </authentication>
 
     <!-- Configurações do diretório de fluxo -->
@@ -27,18 +27,20 @@
     </directory>
 
     <!-- Configurações do servidor -->
-    <hostname>localhost</hostname> <!-- Use seu IP público ou domínio se estiver transmitindo externamente -->
+    <hostname>https://server-icecast.onrender.com</hostname> <!-- Substitua por seu domínio ou IP -->
+    <location>Brasil</location> <!-- Substitua pela sua localização -->
+    <admin>codigoquatro2022@gmail.com</admin> <!-- Substitua pelo seu e-mail de contato -->
 
     <!-- Configurações da porta TCP -->
     <listen-socket>
-        <port>8000</port> <!-- Porta usada para receber conexões de ouvintes e fontes -->
+        <port>8000</port>
     </listen-socket>
 
     <!-- Configurações específicas de montagem -->
     <mount>
-        <mount-name>/stream</mount-name> <!-- Ponto de montagem para streaming -->
+        <mount-name>/stream</mount-name>
         <username>source</username>
-        <password>hackme</password> <!-- Essa senha deve corresponder à configurada no software de transmissão -->
+        <password>hackme</password>
         <max-listeners>1000</max-listeners>
         <burst-size>65536</burst-size>
     </mount>
@@ -62,9 +64,10 @@
 
     <!-- Configurações de Segurança -->
     <security>
-        <changeowner>1</changeowner> <!-- Troca de usuário para evitar execução como root -->
+        <changeowner>1</changeowner>
         <chroot>0</chroot>
     </security>
 </icecast>
+
 
 
