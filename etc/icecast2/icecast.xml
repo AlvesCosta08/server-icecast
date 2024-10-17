@@ -1,73 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <icecast>
-    <!-- Limites -->
     <limits>
-        <clients>1000</clients> <!-- Número máximo de ouvintes simultâneos -->
-        <sources>42</sources> <!-- Número máximo de fontes de áudio simultâneas -->
-        <threadpool>5</threadpool>
-        <queue-size>524288</queue-size>
-        <client-timeout>30</client-timeout>
-        <header-timeout>15</header-timeout>
-        <source-timeout>10</source-timeout>
-        <burst-on-connect>1</burst-on-connect>
-        <burst-size>65535</burst-size>
+        <clients>100</clients> <!-- Máximo de ouvintes -->
+        <sources>2</sources>   <!-- Máximo de fontes de stream -->
     </limits>
 
-    <!-- Autenticação -->
     <authentication>
-        <source-password>hackme</source-password> <!-- Usa a variável de ambiente -->
-        <relay-password>hackme</relay-password> <!-- Usa a variável de ambiente -->
         <admin-user>admin</admin-user>
-        <admin-password>hackme</admin-password> <!-- Usa a variável de ambiente -->
+        <admin-password>senha_admin</admin-password>
     </authentication>
 
-    <!-- Configurações do diretório de fluxo -->
-    <directory>
-        <yp-url-timeout>15</yp-url-timeout>
-        <yp-url>http://dir.xiph.org/cgi-bin/yp-cgi</yp-url>
-    </directory>
-
-    <!-- Configurações do servidor -->
-    <hostname>https://server-icecast.onrender.com</hostname> <!-- Substitua por seu domínio ou IP -->
-    <location>Brasilia, Brasil</location> <!-- Substitua pela sua localização -->
-    <admin>codigoquatro2022@gmail.com</admin> <!-- Substitua pelo seu e-mail de contato -->
-
-    <!-- Configurações da porta TCP -->
+    <hostname>https://server-icecast.onrender.com</hostname>
     <listen-socket>
-        <port>8000</port>
+        <port>8000</port> <!-- Porta onde o Icecast irá escutar -->
     </listen-socket>
 
-    <!-- Configurações específicas de montagem -->
-    <mount>
-        <mount-name>/stream</mount-name>
-        <username>source</username>
-        <password>hackme</password> <!-- Usa a variável de ambiente -->
-        <max-listeners>1000</max-listeners>
-        <burst-size>65536</burst-size>
-    </mount>
+    <fileserve>1</fileserve>
 
-    <!-- Configurações do caminho do arquivo -->
     <paths>
-        <basedir>/usr/share/icecast2</basedir>
-        <logdir>/var/log/icecast2</logdir>
-        <webroot>/usr/share/icecast2/web</webroot>
-        <adminroot>/usr/share/icecast2/admin</adminroot>
+        <basedir>/usr/local/share/icecast</basedir> <!-- Diretório base para arquivos Icecast -->
+        <logdir>/usr/local/var/log/icecast</logdir> <!-- Diretório para os logs -->
+        <webroot>/usr/local/share/icecast/web</webroot> <!-- Diretório para a interface web -->
+        <adminroot>/usr/local/share/icecast/admin</adminroot> <!-- Diretório para administração -->
+        <pidfile>/usr/local/var/run/icecast.pid</pidfile>
         <alias source="/" dest="/status.xsl"/>
     </paths>
 
-    <!-- Configurações de Registro (Logging) -->
     <logging>
         <accesslog>access.log</accesslog>
         <errorlog>error.log</errorlog>
-        <loglevel>3</loglevel> <!-- Nível de log informativo -->
-        <logsize>10000</logsize>
+        <loglevel>3</loglevel> <!-- Nível de log: 4 - debug, 3 - info, 2 - warn, 1 - erro -->
+        <logsize>10000</logsize> <!-- Tamanho máximo dos arquivos de log -->
     </logging>
 
-    <!-- Configurações de Segurança -->
     <security>
-        <changeowner>1</changeowner> <!-- Mudar para um usuário menos privilegiado após inicializar -->
-        <chroot>0</chroot> <!-- Desativar chroot para configuração simplificada -->
+        <chroot>0</chroot>
+        <changeowner>
+            <user>icecast</user>
+            <group>icecast</group>
+        </changeowner>
     </security>
+
+    <mount>
+        <mount-name>/live</mount-name>
+        <file>/usr/local/share/icecast/live</file>
+        <public>1</public>
+        <fallback-mount>/fallback.mp3</fallback-mount>
+    </mount>
+
+    <source-password>hackme</source-password> <!-- Senha para o cliente de origem -->
+    <relay-password>hackme</relay-password>
+    <admin-password>hackme</admin-password>
+
 </icecast>
+
 
 
 
