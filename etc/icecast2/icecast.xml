@@ -1,5 +1,4 @@
 <icecast>
-
     <!-- Limites -->
     <limits>
         <clients>1000</clients> <!-- Máximo de ouvintes simultâneos -->
@@ -15,10 +14,10 @@
 
     <!-- Autenticação -->
     <authentication>
-        <source-password>hackme</source-password> <!-- Senha padrão de conexão da fonte para o SAM Broadcaster -->
-        <relay-password>hackme</relay-password>
+        <source-password>hackme</source-password> <!-- Senha para as fontes -->
+        <relay-password>hackme</relay-password> <!-- Senha para os relays -->
         <admin-user>admin</admin-user>
-        <admin-password>hackme</admin-password>
+        <admin-password>hackme</admin-password> <!-- Senha do administrador -->
     </authentication>
 
     <!-- Configurações do diretório de fluxo -->
@@ -28,7 +27,7 @@
     </directory>
 
     <!-- Configurações do servidor -->
-    <hostname>localhost</hostname> <!-- Ou seu IP público, se você estiver transmitindo externamente -->
+    <hostname>localhost</hostname> <!-- Use seu IP público ou domínio se estiver transmitindo externamente -->
 
     <!-- Configurações da porta TCP -->
     <listen-socket>
@@ -37,9 +36,9 @@
 
     <!-- Configurações específicas de montagem -->
     <mount>
-        <mount-name>/stream</mount-name> <!-- Este é o ponto de montagem que o SAM Broadcaster irá usar -->
+        <mount-name>/stream</mount-name> <!-- Ponto de montagem para streaming -->
         <username>source</username>
-        <password>hackme</password> <!-- Essa senha deve corresponder à configurada no SAM Broadcaster -->
+        <password>hackme</password> <!-- Essa senha deve corresponder à configurada no software de transmissão -->
         <max-listeners>1000</max-listeners>
         <burst-size>65536</burst-size>
     </mount>
@@ -63,8 +62,9 @@
 
     <!-- Configurações de Segurança -->
     <security>
+        <changeowner>1</changeowner> <!-- Troca de usuário para evitar execução como root -->
         <chroot>0</chroot>
     </security>
-
 </icecast>
+
 
