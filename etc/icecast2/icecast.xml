@@ -10,7 +10,7 @@
         <admin-password>admin</admin-password>
     </authentication>
 
-    <hostname>server-icecast.onrender.com:8000/live</hostname> <!-- Removido o https:// -->
+    <hostname>server-icecast.onrender.com:8000</hostname> <!-- Removido o https:// -->
     <location>Brazil</location> <!-- Adicionada a localização -->
     <admin>codigoquatro2022@gmail.com</admin> <!-- Adicionado o contato do administrador -->
 
