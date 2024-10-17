@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   icecast:
     image: meu_icecast # Nome da imagem que você criou com o Dockerfile
@@ -6,6 +8,7 @@ services:
     ports:
       - "8000:8000" # Mapeia a porta 8000 do container para a porta 8000 do host
     volumes:
+      - ./icecast.xml:/etc/icecast2/icecast.xml # Monta o arquivo de configuração personalizado
       - logs:/var/log/icecast2 # Volume para armazenar logs
       - /etc/localtime:/etc/localtime:ro # Sincronizar o tempo do host
     environment:
@@ -17,6 +20,9 @@ services:
 
 volumes:
   logs: # Define um volume para persistência de logs
+
+ 
+
 
 
 
