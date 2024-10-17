@@ -1,8 +1,8 @@
 <icecast>
     <!-- Limites -->
     <limits>
-        <clients>1000</clients>
-        <sources>42</sources>
+        <clients>1000</clients> <!-- Número máximo de ouvintes simultâneos -->
+        <sources>42</sources> <!-- Número máximo de fontes de áudio simultâneas -->
         <threadpool>5</threadpool>
         <queue-size>524288</queue-size>
         <client-timeout>30</client-timeout>
@@ -14,10 +14,10 @@
 
     <!-- Autenticação -->
     <authentication>
-        <source-password>hackme</source-password>
-        <relay-password>hackme</relay-password>
+        <source-password>${ICECAST_SOURCE_PASSWORD}</source-password> <!-- Usa a variável de ambiente -->
+        <relay-password>${ICECAST_RELAY_PASSWORD}</relay-password> <!-- Usa a variável de ambiente -->
         <admin-user>admin</admin-user>
-        <admin-password>hackme</admin-password>
+        <admin-password>${ICECAST_ADMIN_PASSWORD}</admin-password> <!-- Usa a variável de ambiente -->
     </authentication>
 
     <!-- Configurações do diretório de fluxo -->
@@ -40,7 +40,7 @@
     <mount>
         <mount-name>/stream</mount-name>
         <username>source</username>
-        <password>hackme</password>
+        <password>${ICECAST_SOURCE_PASSWORD}</password> <!-- Usa a variável de ambiente -->
         <max-listeners>1000</max-listeners>
         <burst-size>65536</burst-size>
     </mount>
@@ -58,16 +58,17 @@
     <logging>
         <accesslog>access.log</accesslog>
         <errorlog>error.log</errorlog>
-        <loglevel>3</loglevel>
+        <loglevel>3</loglevel> <!-- Nível de log informativo -->
         <logsize>10000</logsize>
     </logging>
 
     <!-- Configurações de Segurança -->
     <security>
-        <changeowner>1</changeowner>
-        <chroot>0</chroot>
+        <changeowner>1</changeowner> <!-- Mudar para um usuário menos privilegiado após inicializar -->
+        <chroot>0</chroot> <!-- Desativar chroot para configuração simplificada -->
     </security>
 </icecast>
+
 
 
 
