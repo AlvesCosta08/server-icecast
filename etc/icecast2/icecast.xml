@@ -14,10 +14,10 @@
 
     <!-- Autenticação -->
     <authentication>
-        <source-password>${ICECAST_SOURCE_PASSWORD}</source-password> <!-- Usa a variável de ambiente -->
-        <relay-password>${ICECAST_RELAY_PASSWORD}</relay-password> <!-- Usa a variável de ambiente -->
+        <source-password>hackme</source-password> <!-- Usa a variável de ambiente -->
+        <relay-password>hackme</relay-password> <!-- Usa a variável de ambiente -->
         <admin-user>admin</admin-user>
-        <admin-password>${ICECAST_ADMIN_PASSWORD}</admin-password> <!-- Usa a variável de ambiente -->
+        <admin-password>hackme</admin-password> <!-- Usa a variável de ambiente -->
     </authentication>
 
     <!-- Configurações do diretório de fluxo -->
@@ -40,7 +40,7 @@
     <mount>
         <mount-name>/stream</mount-name>
         <username>source</username>
-        <password>${ICECAST_SOURCE_PASSWORD}</password> <!-- Usa a variável de ambiente -->
+        <password>hackme</password> <!-- Usa a variável de ambiente -->
         <max-listeners>1000</max-listeners>
         <burst-size>65536</burst-size>
     </mount>
